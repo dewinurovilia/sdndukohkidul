@@ -274,36 +274,24 @@ body{
 
 <script>
 
-let siswa = [
+let siswa = [];
 
-    {
+const scriptURL =
+"https://script.google.com/macros/s/AKfycbzwJEsdSx5TLL6DeIj2vYyiqgTYXlZFAHqIgMvQ3XWx7LPpOjDmRYxOiCzexQkhYrXepQ/exec";
 
-        nama:"Ahmad",
-        kelas:"5A",
-        nis:"1001",
-        nisn:"99887766"
+async function loadSiswa(){
 
-    },
+    let response =
+    await fetch(scriptURL);
 
-    {
+    siswa =
+    await response.json();
 
-        nama:"Budi",
-        kelas:"4B",
-        nis:"1002",
-        nisn:"99887767"
+    renderSiswa();
 
-    },
+}
 
-    {
-
-        nama:"Citra",
-        kelas:"6A",
-        nis:"1003",
-        nisn:"99887768"
-
-    }
-
-];
+loadSiswa();
 
 function renderSiswa(data = siswa){
 

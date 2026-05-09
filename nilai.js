@@ -48,9 +48,9 @@ function loadSiswa(){
 
         siswa.innerHTML += `
 
-            <option>
-                ${nama}
-            </option>
+        <option>
+            ${nama}
+        </option>
 
         `;
 
@@ -84,16 +84,25 @@ function simpanNilai(){
 
     }
 
-    semuaNilai.push({
+    let data = {
 
-        kelas,
-        siswa,
-        mapel,
-        nilai
+        no : semuaNilai.length + 1,
 
-    });
+        kelas : "Kelas " + kelas,
+
+        nama : siswa,
+
+        mapel : mapel,
+
+        nilai : nilai
+
+    };
+
+    semuaNilai.push(data);
 
     renderTabel();
+
+    kirimGoogleSheet(data);
 
     document.getElementById("nilai").value = "";
 
@@ -113,25 +122,43 @@ function renderTabel(){
 
             <td>${index+1}</td>
 
-            <td>
-                Kelas ${item.kelas}
-            </td>
+            <td>${item.kelas}</td>
 
-            <td>
-                ${item.siswa}
-            </td>
+            <td>${item.nama}</td>
 
-            <td>
-                ${item.mapel}
-            </td>
+            <td>${item.mapel}</td>
 
-            <td>
-                ${item.nilai}
-            </td>
+            <td>${item.nilai}</td>
 
         </tr>
 
         `;
+
+    });
+
+}
+
+function kirimGoogleSheet(data){
+
+    fetch(scriptURL,{
+
+        method:"POST",
+
+        body:JSON.stringify(data)
+
+    })
+
+    .then(res=>res.text())
+
+    .then(res=>{
+
+        console.log("Berhasil:",res);
+
+    })
+
+    .catch(err=>{
+
+        console.log(err);
 
     });
 

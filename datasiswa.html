@@ -310,13 +310,17 @@ function renderSiswa(data = siswa){
 
             <td>${index+1}</td>
 
-            <td>${item.nama}</td>
+            <td>${item.nama || "-"}</td>
 
-            <td>${item.kelas}</td>
+            <td>${item.jenisKelamin || "-"}</td>
 
-            <td>${item.nis}</td>
+            <td>${item.kelas || "-"}</td>
 
-            <td>${item.nisn}</td>
+            <td>${item.tempatLahir || "-"}</td>
+
+            <td>${item.tanggalLahir || "-"}</td>
+
+            <td>${item.nisn || "-"}</td>
 
         </tr>
 

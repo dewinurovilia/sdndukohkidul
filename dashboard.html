@@ -12,20 +12,36 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
+
+body{
+
+    background:#f4f6f9;
+    font-family:Arial;
+
+}
+
+/* SIDEBAR */
 
 .sidebar{
 
     width:260px;
     height:100vh;
+
     background:#0d6efd;
+
     position:fixed;
+
     left:0;
     top:0;
+
     padding:20px;
+
     color:white;
+
+    overflow:auto;
 
 }
 
@@ -36,12 +52,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 }
 
-.menu{
-
-    margin-top:20px;
-
-}
-
 .menu a{
 
     display:flex;
@@ -49,9 +59,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     gap:12px;
 
     text-decoration:none;
+
     color:white;
 
     padding:14px;
+
     border-radius:12px;
 
     margin-bottom:10px;
@@ -73,6 +85,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 }
 
+/* CONTENT */
+
 .content{
 
     margin-left:280px;
@@ -83,8 +97,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 .topbar{
 
     background:white;
+
     padding:20px;
+
     border-radius:20px;
+
     box-shadow:0 4px 10px rgba(0,0,0,0.08);
 
 }
@@ -92,8 +109,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 .card-box{
 
     background:white;
+
     border-radius:20px;
+
     padding:25px;
+
     box-shadow:0 4px 10px rgba(0,0,0,0.08);
 
 }
@@ -102,6 +122,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
     font-size:35px;
     font-weight:bold;
+
+}
+
+.table td,
+.table th{
+
+    vertical-align:middle;
 
 }
 
@@ -213,7 +240,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
                 <h6>Total Siswa</h6>
 
                 <div class="number text-primary">
+
                     320
+
                 </div>
 
             </div>
@@ -227,7 +256,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
                 <h6>Hadir Hari Ini</h6>
 
                 <div class="number text-success">
+
                     298
+
                 </div>
 
             </div>
@@ -241,7 +272,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
                 <h6>Total Guru</h6>
 
                 <div class="number text-warning">
+
                     24
+
                 </div>
 
             </div>
@@ -252,10 +285,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
             <div class="card-box">
 
-                <h6>Alpha</h6>
+                <h6>Tidak Hadir</h6>
 
                 <div class="number text-danger">
+
                     5
+
                 </div>
 
             </div>
@@ -264,29 +299,67 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
     </div>
 
-    <!-- DATA -->
+    <!-- DIAGRAM -->
 
-    <div class="card-box mt-4">
+    <div class="row mt-4">
 
-        <div class="d-flex justify-content-between">
+        <!-- DIAGRAM ABSENSI -->
 
-            <h4>
-                Data Absensi Hari Ini
-            </h4>
+        <div class="col-md-6 mb-4">
 
-            <button class="btn btn-primary">
+            <div class="card-box">
 
-                Lihat Semua
+                <h4 class="mb-4">
+                    Diagram Absensi
+                </h4>
 
-            </button>
+                <canvas id="chartAbsensi"></canvas>
+
+            </div>
 
         </div>
 
-        <div class="table-responsive mt-3">
+        <!-- DIAGRAM NILAI -->
 
-            <table class="table table-bordered">
+        <div class="col-md-6 mb-4">
 
-                <thead>
+            <div class="card-box">
+
+                <h4 class="mb-4">
+                    Diagram Nilai
+                </h4>
+
+                <canvas id="chartNilai"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ABSENSI -->
+
+    <div class="card-box mt-4">
+
+        <div class="mb-4">
+
+            <h4 class="mb-1">
+                Absensi Hari Ini
+            </h4>
+
+            <small class="text-muted">
+                Monitoring siswa tidak hadir, sakit, dan izin
+            </small>
+
+        </div>
+
+        <!-- TABEL -->
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead class="table-primary">
 
                     <tr>
 
@@ -294,6 +367,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
                         <th>Nama</th>
                         <th>Kelas</th>
                         <th>Status</th>
+                        <th>Keterangan</th>
 
                     </tr>
 
@@ -304,14 +378,112 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
                     <tr>
 
                         <td>1</td>
-                        <td>Ahmad</td>
-                        <td>5A</td>
 
                         <td>
 
-                            <span class="badge bg-success">
-                                Hadir
+                            <div class="fw-bold">
+
+                                Budi
+
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            4B
+
+                        </td>
+
+                        <td>
+
+                            <span class="badge bg-danger px-3 py-2">
+
+                                Tidak Hadir
+
                             </span>
+
+                        </td>
+
+                        <td>
+
+                            Tidak masuk tanpa keterangan
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>2</td>
+
+                        <td>
+
+                            <div class="fw-bold">
+
+                                Citra
+
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            5A
+
+                        </td>
+
+                        <td>
+
+                            <span class="badge bg-warning text-dark px-3 py-2">
+
+                                Sakit
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            Demam
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>3</td>
+
+                        <td>
+
+                            <div class="fw-bold">
+
+                                Dewi
+
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            6A
+
+                        </td>
+
+                        <td>
+
+                            <span class="badge bg-info text-dark px-3 py-2">
+
+                                Izin
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            Acara keluarga
 
                         </td>
 
@@ -326,6 +498,105 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     </div>
 
 </div>
+
+<!-- CHART -->
+
+<script>
+
+/* DIAGRAM ABSENSI */
+
+const absensi =
+document.getElementById(
+'chartAbsensi'
+);
+
+new Chart(absensi, {
+
+    type:'doughnut',
+
+    data:{
+
+        labels:[
+
+            'Hadir',
+            'Tidak Hadir',
+            'Sakit',
+            'Izin'
+
+        ],
+
+        datasets:[{
+
+            data:[
+
+                298,
+                5,
+                3,
+                7
+
+            ],
+
+            backgroundColor:[
+
+                '#198754',
+                '#dc3545',
+                '#ffc107',
+                '#0dcaf0'
+
+            ]
+
+        }]
+
+    }
+
+});
+
+/* DIAGRAM NILAI */
+
+const nilai =
+document.getElementById(
+'chartNilai'
+);
+
+new Chart(nilai, {
+
+    type:'bar',
+
+    data:{
+
+        labels:[
+
+            'Matematika',
+            'IPA',
+            'IPS',
+            'Bahasa Indonesia',
+            'PPKN'
+
+        ],
+
+        datasets:[{
+
+            label:'Rata-rata Nilai',
+
+            data:[
+
+                88,
+                90,
+                85,
+                92,
+                89
+
+            ],
+
+            backgroundColor:'#0d6efd'
+
+        }]
+
+    }
+
+});
+
+</script>
 
 </body>
 </html>

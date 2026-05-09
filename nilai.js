@@ -116,11 +116,18 @@ function kirimGoogleSheet(data){
 
     })
 
-  .then(res=>{
+.then(res=>{
 
-    alert("Nilai berhasil disimpan");
+    let notif =
+    document.getElementById("notif");
 
-    console.log("Berhasil:",res);
+    notif.classList.remove("d-none");
+
+    setTimeout(()=>{
+
+        notif.classList.add("d-none");
+
+    },2000);
 
 })
 

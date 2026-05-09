@@ -24,40 +24,10 @@ function jam(){
 
 }
 
-function renderAbsensi(){
+function tanggal(){
 
-    let tbody =
-    document.getElementById("tbody");
-
-    tbody.innerHTML = "";
-
-    absensi.forEach((item,index)=>{
-
-        tbody.innerHTML += `
-
-        <tr>
-
-            <td>${index+1}</td>
-
-            <td>${item.nama}</td>
-
-            <td>${item.jam}</td>
-
-            <td>
-
-                <span class="badge bg-success">
-
-                    Hadir
-
-                </span>
-
-            </td>
-
-        </tr>
-
-        `;
-
-    });
+    return new Date()
+    .toLocaleDateString();
 
 }
 
@@ -101,18 +71,65 @@ function mulaiScan(){
 
             }
 
-            absensi.push({
+            let data = {
 
-                kode:decodedText,
-                nama:nama,
-                jam:jam()
+                no : absensi.length + 1,
 
-            });
+                tanggal : tanggal(),
 
-            renderAbsensi();
+                kelas :
+                localStorage.getItem("kelas"),
+
+                guru :
+                localStorage.getItem("guru"),
+
+                nama : nama,
+
+                jam : jam(),
+
+                status : "Hadir"
+
+            };
+
+            absensi.push(data);
+
+            kirimGoogleSheet(data);
+
+            alert(
+
+                nama +
+                " berhasil absen"
+
+            );
 
         }
 
     );
+
+}
+
+function kirimGoogleSheet(data){
+
+    fetch(scriptURL,{
+
+        method:"POST",
+
+        body:JSON.stringify(data)
+
+    })
+
+    .then(res=>res.text())
+
+    .then(res=>{
+
+        console.log("Berhasil");
+
+    })
+
+    .catch(err=>{
+
+        console.log(err);
+
+    });
 
 }

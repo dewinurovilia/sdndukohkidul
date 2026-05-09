@@ -5,29 +5,29 @@ body{
 
 }
 
+.title{
+
+    font-weight:bold;
+    color:#0d6efd;
+
+}
+
 .card{
 
     border:none;
     border-radius:20px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
 
 }
 
-.title{
+.menu-card{
 
-    color:#0d6efd;
-    font-weight:bold;
-
-}
-
-#reader{
-
-    width:100%;
+    transition:0.3s;
 
 }
 
-table{
+.menu-card:hover{
 
-    background:white;
+    transform:translateY(-5px);
 
 }

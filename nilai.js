@@ -23,7 +23,7 @@ let dataSiswa = {
     ],
 
     5 : [
-        "Kiki",
+        "Rohmat",
         "Lina"
     ],
 
@@ -100,41 +100,9 @@ function simpanNilai(){
 
     semuaNilai.push(data);
 
-    renderTabel();
-
     kirimGoogleSheet(data);
 
     document.getElementById("nilai").value = "";
-
-}
-
-function renderTabel(){
-
-    let tbody = document.getElementById("tbody");
-
-    tbody.innerHTML = "";
-
-    semuaNilai.forEach((item,index)=>{
-
-        tbody.innerHTML += `
-
-        <tr>
-
-            <td>${index+1}</td>
-
-            <td>${item.kelas}</td>
-
-            <td>${item.nama}</td>
-
-            <td>${item.mapel}</td>
-
-            <td>${item.nilai}</td>
-
-        </tr>
-
-        `;
-
-    });
 
 }
 

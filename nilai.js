@@ -116,13 +116,13 @@ function kirimGoogleSheet(data){
 
     })
 
-    .then(res=>res.text())
+  .then(res=>{
 
-    .then(res=>{
+    alert("Nilai berhasil disimpan");
 
-        console.log("Berhasil:",res);
+    console.log("Berhasil:",res);
 
-    })
+})
 
     .catch(err=>{
 
